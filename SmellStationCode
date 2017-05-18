@@ -1,0 +1,84 @@
+// constants won't change. They're used here to
+// set pin numbers:
+
+//Question 1 green red button ports
+const int Q1GreenButton = A0;     // the number of the pushbutton pin
+const int Q1RedButton   = A1;     // the number of the pushbutton pin
+
+//Question 2 Green Red button ports
+const int Q2GreenButton = A2;     // the number of the pushbutton pin
+const int Q2RedButton   = A3;     // the number of the pushbutton pin
+
+//Question 3 Green Red button ports
+const int Q3GreenButton = A4;     // the number of the pushbutton pin
+const int Q3RedButton   = A5;     // the number of the pushbutton pin
+
+//Question 4 Green Red button ports
+const int Q4GreenButton = 13;     // the number of the pushbutton pin
+const int Q4RedButton   = 12;     // the number of the pushbutton pin
+
+//led pin 11 for fan
+const int FanPin = 11;
+//Question 1 green res led ports
+const int Q1GreenLed = 10;
+const int Q1RedLed = 9;
+
+//Question 2 green res led ports
+const int Q2GreenLed = 8;
+const int Q2RedLed = 7;
+
+//Question 3 green res led ports
+const int Q3GreenLed = 6;
+const int Q3RedLed = 5;
+
+//Question 4 green res led ports
+const int Q4GreenLed = 4;
+const int Q4RedLed = 3;
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(Q1GreenLed, OUTPUT);
+  pinMode(Q1RedLed,OUTPUT);
+  pinMode(Q2GreenLed, OUTPUT);
+  pinMode(Q2RedLed,OUTPUT);
+  pinMode(Q3GreenLed, OUTPUT);
+  pinMode(Q3RedLed,OUTPUT);
+  pinMode(Q4GreenLed, OUTPUT);
+  pinMode(Q4RedLed,OUTPUT);
+  pinMode(FanPin,OUTPUT);
+  // initialize the pushbutton pin as an input:
+}
+
+void loop() {
+
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  bool Answer1,Answer2,Answer3,Answer4;
+  Answer1 = TrueFalseFunction(Q1GreenButton,Q1RedButton,Q1GreenLed,Q1RedLed);
+  Answer2 = TrueFalseFunction(Q2GreenButton,Q2RedButton,Q2GreenLed,Q2RedLed);
+  Answer3 = TrueFalseFunction(Q3GreenButton,Q3RedButton,Q3GreenLed,Q3RedLed);
+  Answer4 = TrueFalseFunction(Q4RedButton,Q4GreenButton,Q4GreenLed,Q4RedLed);
+  if(Answer1 == true && Answer2  ==true && Answer3 == true && Answer4==true){
+          digitalWrite(FanPin,HIGH);}
+  else{
+    digitalWrite(FanPin,LOW);}
+}
+
+
+
+bool TrueFalseFunction(const int GreenButton,const int RedButton,const int GreenLed,const int RedLed){
+    if (digitalRead(GreenButton) == HIGH && digitalRead(RedButton) == LOW ) {
+      digitalWrite(GreenLed, HIGH);
+      digitalWrite(RedLed,LOW);
+      return true;} 
+    else if (digitalRead(GreenButton) == LOW && digitalRead(RedButton) == LOW){
+      digitalWrite(RedLed, LOW);
+      digitalWrite(GreenLed,LOW);} 
+    else{
+      digitalWrite(RedLed,HIGH);
+      digitalWrite(GreenLed,LOW);}
+    return false;
+}
